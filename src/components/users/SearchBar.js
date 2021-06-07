@@ -1,11 +1,28 @@
 import React, { Component } from "react";
 
 class SearchBar extends Component {
+  state = {
+    searchbar: "",
+  };
+
+  onChange = (event) => {
+    this.setState({ searchbar: event.target.value });
+  };
+  onSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state.searchbar);
+  };
   render() {
     return (
       <div>
-        <form className="form">
-          <input type="text" name="searchbar" placeholder="Search..." />
+        <form onSubmit={this.onSubmit} className="form">
+          <input
+            type="text"
+            name="searchbar"
+            placeholder="Search..."
+            value={this.state.searchbar}
+            onChange={this.onChange}
+          />
           <input
             type="submit"
             value="Search"
