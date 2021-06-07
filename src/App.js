@@ -10,7 +10,9 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    fetch("https://api.github.com/users")
+    fetch(
+      `https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
       .then((res) => res.json())
       .then((data) => this.setState({ loading: false, users: data }));
   }
