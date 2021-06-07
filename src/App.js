@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "./components/layout/Navbar";
 import Users from "./components/users/Users";
+import SearchBar from "./components/users/SearchBar";
 import "./App.css";
 class App extends Component {
   state = {
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
+        <SearchBar />
         <div className="container">
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
