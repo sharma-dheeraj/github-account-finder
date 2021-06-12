@@ -29,6 +29,7 @@ class App extends Component {
         <SearchBar
           searchUsers={this.searchUsers}
           clearUsers={this.clearUsers}
+          showClear={this.state.users.length > 0 ? true : false}
         />
         <div className="container">
           <Users loading={this.state.loading} users={this.state.users} />
