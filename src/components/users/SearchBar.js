@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class SearchBar extends Component {
   state = {
@@ -10,7 +11,8 @@ class SearchBar extends Component {
   };
   onSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.searchbar);
+    this.props.searchUsers(this.state.searchbar);
+    this.setState({ searchbar: "" });
   };
   render() {
     return (
@@ -33,5 +35,9 @@ class SearchBar extends Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  searchUsers: PropTypes.func.isRequired,
+};
 
 export default SearchBar;
