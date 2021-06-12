@@ -31,6 +31,12 @@ class SearchBar extends Component {
             className="btn btn-dark btn-block"
           />
         </form>
+        <button
+          className="btn btn-light btn-block"
+          onClick={this.props.clearUsers}
+        >
+          Clear
+        </button>
       </div>
     );
   }
@@ -38,6 +44,7 @@ class SearchBar extends Component {
 
 SearchBar.propTypes = {
   searchUsers: PropTypes.func.isRequired,
+  clearUsers: PropTypes.func.isRequired,
 };
 
 export default SearchBar;
