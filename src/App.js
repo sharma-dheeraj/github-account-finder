@@ -7,6 +7,7 @@ class App extends Component {
   state = {
     users: [],
     loading: false,
+    alert: null,
   };
 
   searchUsers = (search) => {
@@ -22,6 +23,10 @@ class App extends Component {
     this.setState({ users: [], loading: false });
   };
 
+  setAlert = (msg, type) => {
+    this.setState({ alert: { msg: msg, type: type } });
+  };
+
   render() {
     return (
       <div className="App">
@@ -30,6 +35,7 @@ class App extends Component {
           searchUsers={this.searchUsers}
           clearUsers={this.clearUsers}
           showClear={this.state.users.length > 0 ? true : false}
+          setAlert={this.setAlert}
         />
         <div className="container">
           <Users loading={this.state.loading} users={this.state.users} />
