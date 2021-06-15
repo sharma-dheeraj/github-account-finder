@@ -11,8 +11,12 @@ class SearchBar extends Component {
   };
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.searchUsers(this.state.searchbar);
-    this.setState({ searchbar: "" });
+    if (this.state.searchbar === "") {
+      this.props.setAlert("Please enter something", "light");
+    } else {
+      this.props.searchUsers(this.state.searchbar);
+      this.setState({ searchbar: "" });
+    }
   };
   render() {
     return (
@@ -48,6 +52,7 @@ SearchBar.propTypes = {
   searchUsers: PropTypes.func.isRequired,
   clearUsers: PropTypes.func.isRequired,
   showClear: PropTypes.bool.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 export default SearchBar;
