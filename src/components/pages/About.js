@@ -8,7 +8,7 @@ const About = () => {
         Github account finder searches for users based on the search query in
         guthub users name and their bio's to find the matching user.
       </p>
-      <p>Version: 1.0.0</p>
+      <h3>version: 1.0.0</h3>
     </Fragment>
   );
 };
