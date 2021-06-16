@@ -6,14 +6,18 @@ import Users from "./components/users/Users";
 import SearchBar from "./components/users/SearchBar";
 import Alert from "./components/layout/Alert";
 import About from "./components/pages/About";
+import User from "./components/users/User";
 import "./App.css";
 class App extends Component {
+  // APP STATES
   state = {
     users: [],
     loading: false,
     alert: null,
+    user: {},
   };
 
+  // SEARCH FOR ARRAY OF USERS WITH MATCHING RESULTS
   searchUsers = (search) => {
     this.setState({ loading: true });
     fetch(
@@ -23,15 +27,27 @@ class App extends Component {
       .then((data) => this.setState({ loading: false, users: data.items }));
   };
 
+  // CLEAR USER ARRAY
   clearUsers = () => {
     this.setState({ users: [], loading: false });
   };
 
+  // ALERTS USER IS SEARCH PARAMETER IS EMPTY
   setAlert = (msg, type) => {
     this.setState({ alert: { msg: msg, type: type } });
     setTimeout(() => {
       this.setState({ alert: null });
     }, 5000);
+  };
+
+  // GET SINGLE USER
+  getUser = async (username) => {
+    this.setState({ loading: true });
+    fetch(
+      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
+      .then((res) => res.json())
+      .then((data) => this.setState({ loading: false, user: data }));
   };
 
   render() {
@@ -62,6 +78,18 @@ class App extends Component {
               )}
             />
             <Route exact path="/about" component={About} />
+            <Route
+              exact
+              path="/user/:login"
+              render={(props) => (
+                <User
+                  {...props}
+                  getUser={this.getUser}
+                  loading={this.state.loading}
+                  user={this.state.user}
+                />
+              )}
+            />
           </Switch>
         </div>
       </Router>
