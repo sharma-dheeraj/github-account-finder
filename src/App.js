@@ -15,16 +15,17 @@ class App extends Component {
     loading: false,
     alert: null,
     user: {},
+    repos: [],
   };
 
   // SEARCH FOR ARRAY OF USERS WITH MATCHING RESULTS
-  searchUsers = (search) => {
+  searchUsers = async (search) => {
     this.setState({ loading: true });
     fetch(
       `https://api.github.com/search/users?q=${search}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
       .then((res) => res.json())
-      .then((data) => this.setState({ loading: false, users: data.items }));
+      .then((data) => this.setState({ users: data.items, loading: false }));
   };
 
   // CLEAR USER ARRAY
@@ -32,7 +33,7 @@ class App extends Component {
     this.setState({ users: [], loading: false });
   };
 
-  // ALERTS USER IS SEARCH PARAMETER IS EMPTY
+  // ALERTS USER IF SEARCH PARAMETER IS EMPTY
   setAlert = (msg, type) => {
     this.setState({ alert: { msg: msg, type: type } });
     setTimeout(() => {
@@ -47,7 +48,19 @@ class App extends Component {
       `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
       .then((res) => res.json())
-      .then((data) => this.setState({ loading: false, user: data }));
+      .then((data) => this.setState({ user: data, loading: false }));
+  };
+
+  // SHOWING USER REPOS
+  getUserRepos = async (username) => {
+    this.setState({ loading: true });
+    fetch(
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
+      .then((res) => res.json())
+      .then((data) => this.setState({ repos: data, loading: false }));
+
+    // this.setState({ repos: res.data, loading: false });
   };
 
   render() {
@@ -85,8 +98,10 @@ class App extends Component {
                 <User
                   {...props}
                   getUser={this.getUser}
+                  getUserRepos={this.getUserRepos}
                   loading={this.state.loading}
                   user={this.state.user}
+                  repos={this.state.repos}
                 />
               )}
             />
