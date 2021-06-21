@@ -17,19 +17,6 @@ const App = () => {
   const [user, setUser] = useState({});
   const [repos, setRepos] = useState([]);
 
-  // SEARCH FOR ARRAY OF USERS WITH MATCHING RESULTS
-  const searchUsers = async (search) => {
-    setLoading(true);
-    fetch(
-      `https://api.github.com/search/users?q=${search}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data.items);
-        setLoading(false);
-      });
-  };
-
   // CLEAR USER ARRAY
   const clearUsers = () => {
     setUsers([]);
@@ -83,7 +70,6 @@ const App = () => {
               render={(props) => (
                 <Fragment>
                   <SearchBar
-                    searchUsers={searchUsers}
                     clearUsers={clearUsers}
                     showClear={users.length > 0 ? true : false}
                     setAlert={showAlert}
