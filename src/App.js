@@ -11,9 +11,7 @@ import GithubState from "./context/github/GithubState";
 import "./App.css";
 const App = () => {
   // APP STATES
-  const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
-  const [repos, setRepos] = useState([]);
 
   // ALERTS USER IF SEARCH PARAMETER IS EMPTY
   const showAlert = (msg, type) => {
@@ -21,19 +19,6 @@ const App = () => {
     setTimeout(() => {
       setAlert(null);
     }, 5000);
-  };
-
-  // SHOWING USER REPOS
-  const getUserRepos = async (username) => {
-    setLoading(true);
-    fetch(
-      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setRepos(data);
-        setLoading(false);
-      });
   };
 
   return (
@@ -56,13 +41,7 @@ const App = () => {
               )}
             />
             <Route exact path="/about" component={About} />
-            <Route
-              exact
-              path="/user/:login"
-              render={(props) => (
-                <User {...props} getUserRepos={getUserRepos} repos={repos} />
-              )}
-            />
+            <Route exact path="/user/:login" component={User} />
           </Switch>
         </div>
       </Router>
