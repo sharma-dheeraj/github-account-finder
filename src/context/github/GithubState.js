@@ -30,7 +30,17 @@ const GithubState = (props) => {
       });
   };
 
-  // GET USER
+  // GET SINGLE USER
+  const getUser = async (username) => {
+    setLoading();
+    fetch(
+      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: GET_USER, payload: data });
+      });
+  };
 
   // GET REPOS
 
@@ -51,6 +61,7 @@ const GithubState = (props) => {
         loading: state.loading,
         searchUsers,
         clearUsers,
+        getUser,
       }}
     >
       {props.children}
