@@ -13,7 +13,6 @@ const App = () => {
   // APP STATES
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
-  const [user, setUser] = useState({});
   const [repos, setRepos] = useState([]);
 
   // ALERTS USER IF SEARCH PARAMETER IS EMPTY
@@ -22,19 +21,6 @@ const App = () => {
     setTimeout(() => {
       setAlert(null);
     }, 5000);
-  };
-
-  // GET SINGLE USER
-  const getUser = async (username) => {
-    setLoading(true);
-    fetch(
-      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setUser(data);
-        setLoading(false);
-      });
   };
 
   // SHOWING USER REPOS
@@ -74,14 +60,7 @@ const App = () => {
               exact
               path="/user/:login"
               render={(props) => (
-                <User
-                  {...props}
-                  getUser={getUser}
-                  getUserRepos={getUserRepos}
-                  loading={loading}
-                  user={user}
-                  repos={repos}
-                />
+                <User {...props} getUserRepos={getUserRepos} repos={repos} />
               )}
             />
           </Switch>
