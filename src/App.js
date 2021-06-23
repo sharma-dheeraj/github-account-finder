@@ -11,17 +11,10 @@ import GithubState from "./context/github/GithubState";
 import "./App.css";
 const App = () => {
   // APP STATES
-  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
   const [user, setUser] = useState({});
   const [repos, setRepos] = useState([]);
-
-  // CLEAR USER ARRAY
-  const clearUsers = () => {
-    setUsers([]);
-    setLoading(false);
-  };
 
   // ALERTS USER IF SEARCH PARAMETER IS EMPTY
   const showAlert = (msg, type) => {
@@ -69,13 +62,9 @@ const App = () => {
               path="/"
               render={(props) => (
                 <Fragment>
-                  <SearchBar
-                    clearUsers={clearUsers}
-                    showClear={users.length > 0 ? true : false}
-                    setAlert={showAlert}
-                  />
+                  <SearchBar setAlert={showAlert} />
                   <div className="container">
-                    <Users loading={loading} users={users} />
+                    <Users />
                   </div>
                 </Fragment>
               )}
