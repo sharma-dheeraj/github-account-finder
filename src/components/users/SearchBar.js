@@ -34,7 +34,7 @@ const SearchBar = () => {
         <input
           type="submit"
           value="Search"
-          className="btn btn-dark btn-block"
+          className="btn btn-light btn-block"
         />
       </form>
       {githubContext.users.length > 0 && (
