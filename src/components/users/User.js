@@ -36,7 +36,7 @@ const User = ({ match }) => {
       <Link to="/" className=" btn btn-light">
         Back
       </Link>
-      Hireable:{" "}
+      <span style={{ color: "white" }}>Hireable: </span>
       {hireable ? (
         <i className="fas fa-check text-success" />
       ) : (
