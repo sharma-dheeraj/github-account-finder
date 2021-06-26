@@ -7,12 +7,16 @@ const RepoItem = ({ repo }) => {
       <div className="card all-center">
         <h3>
           <a href={repo.html_url}>
-            <span>Repo Name: </span>
-            {repo.full_name}
+            <strong>
+              Repo Name:
+              {repo.full_name}
+            </strong>
           </a>{" "}
           <p>
-            <span>Description: </span>
-            {repo.description}
+            <strong>
+              Description:
+              {repo.description}
+            </strong>
           </p>
         </h3>
       </div>
