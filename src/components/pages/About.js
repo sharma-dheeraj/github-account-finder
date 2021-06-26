@@ -9,10 +9,9 @@ const About = () => {
         This web app searches for users based on the search query in github
         users name and their bio's to find the matching user.
         <br />
-        This account finder was build with <strong>
+        This account finder was build with <span>
           create-react-app
-        </strong>{" "}
-        using <strong>hooks</strong> and <strong>context api</strong> for state
+        </span> using <span>hooks</span> and <span>context api</span> for state
         management.
         <br />
         <br />
