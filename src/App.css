@@ -10,10 +10,10 @@
 }
 
 strong {
-  color: #ffcd73;
+  color: #062c50;
 }
 span {
-  color: var(--light-color);
+  color: #ffcd73;
 }
 
 * {
@@ -32,7 +32,7 @@ body {
 }
 
 a {
-  color: #ffcd73;
+  color: #68655f;
   text-decoration: none;
 }
 
@@ -104,8 +104,8 @@ img {
   border: #000 10px solid;
   border-radius: 25px;
   margin: 2rem 3rem;
-  color: #ffcd73;
-  background-color: #062c50;
+  background-color: #ffcd73;
+  color: #062c50;
 }
 
 /* List */
